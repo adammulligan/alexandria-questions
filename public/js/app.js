@@ -20,3 +20,16 @@ $('a').on('click', function(event) {
   $('.details.hidden').hide();
   $el.parents('li').find('.details.hidden').show();
 });
+
+$('.new_category').on('keypress', function(event) {
+  if (event.which === 13) {
+    event.preventDefault();
+
+    $el = $(event.target);
+
+    $select = $el.parents('fieldset').find('select');
+    $select.append('<option selected>'+$el.val()+'</option');
+
+    $el.val('');
+  }
+});

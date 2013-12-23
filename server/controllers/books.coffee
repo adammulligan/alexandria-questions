@@ -1,9 +1,6 @@
 cradle = require('cradle')
 db = new(cradle.Connection)().database('books')
 
-exports.index = (req, res) ->
-  res.redirect('/')
-
 exports.create = (req, res) ->
   id = req.params.id
   console.log req.body
