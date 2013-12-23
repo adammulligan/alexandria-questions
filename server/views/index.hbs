@@ -41,7 +41,7 @@
               {{#if thumbnail}}
                 <img src="{{thumbnail}}">
               {{/if}}
-              <form accept-charset="UTF-8" method="post" action="/book/{{../book.id}}">
+              <form accept-charset="UTF-8" method="post" action="/books/{{../book.id}}">
                 {{> book-form this}}
               </form>
             </div>
@@ -50,7 +50,7 @@
           <li>
             <a><strong>Not listed?</strong></a>
             <div class="details hidden">
-              <form accept-charset="UTF-8" method="post" action="/book/{{book.id}}">
+              <form accept-charset="UTF-8" method="post" action="/books/{{book.id}}">
                 {{> book-form}}
               </form
             </div>
@@ -59,7 +59,7 @@
       </div>
 
       <aside class="large-6 columns">
-        <iframe src="/book/{{book.id}}" style="width:100%;height:500px;"></iframe>
+        <iframe src="/books/{{book.id}}.pdf" style="width:100%;height:500px;"></iframe>
       </aside>
     </div>
 

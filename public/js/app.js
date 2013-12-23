@@ -2,11 +2,11 @@ $('.delete').on('click', function(event) {
   var confirmDelete = confirm('Are you sure?');
   if (confirmDelete) {
     $.ajax({
-      url: '/book/{{book.id}}',
+      url: '/books/{{book.id}}',
       method: 'DELETE',
       data: {id: '{{book.id}}'}
     }).done(function(data) {
-      window.location = '/'
+      window.location = '/';
     }).fail(function(jqXHR, textStatus, errorThrown) {
       alert('Could not delete, check logs');
       console.log(jqXHR);
