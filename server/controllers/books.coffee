@@ -1,28 +1,51 @@
 cradle = require('cradle')
 db = new(cradle.Connection)().database('books')
 
+_ = require('underscore')
+request = require('request')
+
+attributeWhitelist = ['name', 'authors', 'thumbnail', 'category']
+
+paramsToAttributes = (params) ->
+  attributes = _.pick(params, attributeWhitelist)
+  return _.extend(seen: true, attributes)
+
+attachmentData =
+  name: 'thumbnail'
+  'Content-Type': 'image/jpeg'
+
+thumbnailStreamFromUrl = (url) ->
+  return request(url)
+
 exports.create = (req, res) ->
   id = req.params.id
-  console.log req.body
-  #db.merge(id, _.extend(seen: true, req.body), (err, result) ->
-    #if err?
-      #return res.send 500, err
 
-    #if req.body.thumbnail? && req.body.thumbnail.length > 0
-      #attachmentData =
-        #name: 'thumbnail'
-        #'Content-Type': 'image/jpeg'
-      #thumbnailStream = request(req.body.thumbnail)
+  bookAttributes = paramsToAttributes(req.body)
 
-      #writeStream = db.saveAttachment(id, attachmentData, (err, reply) ->
-        #if err?
-          #return res.send 500, err
+  console.log bookAttributes
 
-        #console.log reply
-        #res.redirect '/'
-      #)
-      #thumbnailStream.pipe(writeStream)
-  #)
+  db.merge(id, bookAttributes, (err, result) ->
+    if err?
+      return res.send 500, err
+
+    console.log id
+
+    thumbnailUrl = req.body.thumbnail
+    if thumbnailUrl? && thumbnailUrl.length > 0
+      thumbnailStream = thumbnailStreamFromUrl(thumbnailUrl)
+
+      writeStream = db.saveAttachment(id, attachmentData, (err, reply) ->
+        if err?
+          return res.send 500, err
+
+        console.log reply
+        res.redirect '/'
+      )
+
+      thumbnailStream.pipe(writeStream)
+    else
+      res.redirect '/'
+  )
 
 exports.destroy = (req, res) ->
   id = req.params.id
