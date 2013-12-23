@@ -37,7 +37,8 @@ startServer = ->
 
   setupDb()
 
-  app.use express.bodyParser()
+  app.use(express.json())
+  app.use(express.urlencoded())
 
   app.get('/', (req, res) ->
     db.view('books/unseen', (err, docs) ->
