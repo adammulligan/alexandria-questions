@@ -1,19 +1,21 @@
-$('.delete').on('click', function(event) {
-  var confirmDelete = confirm('Are you sure?');
-  if (confirmDelete) {
-    $.ajax({
-      url: '/books/{{book.id}}',
-      method: 'DELETE',
-      data: {id: '{{book.id}}'}
-    }).done(function(data) {
-      window.location = '/';
-    }).fail(function(jqXHR, textStatus, errorThrown) {
-      alert('Could not delete, check logs');
-      console.log(jqXHR);
-      console.log(textStatus);
-    });
-  }
-});
+var initialiseDeleteButton = function(bookId) {
+  $('.delete').on('click', function(event) {
+    var confirmDelete = confirm('Are you sure?');
+    if (confirmDelete) {
+      $.ajax({
+        url: '/books/'+bookId,
+        method: 'DELETE',
+        data: {id: bookId}
+      }).done(function(data) {
+        window.location = '/';
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        alert('Could not delete, check logs');
+        console.log(jqXHR);
+        console.log(textStatus);
+      });
+    }
+  });
+};
 
 $('a').on('click', function(event) {
   $el = $(event.target);
