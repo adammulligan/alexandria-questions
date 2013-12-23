@@ -1,0 +1,35 @@
+<fieldset>
+  <dl>
+    <dt><label for="name">Name</label></dt>
+    <dd><input id="name" name="name" type="text" value="{{title}}"></dd>
+  </dl>
+</fieldset>
+
+<fieldset>
+  <dl>
+    <dt><label for="category">Category</label></dt>
+    <dd>
+    <select name="category" id="category">
+      {{#each categories}}
+        <option>{{this}}</option>
+      {{/each}}
+    </select>
+    </dd>
+  </dl>
+</fieldset>
+
+<fieldset>
+  <dl>
+    <dt><label for="authors">Authors</label></dt>
+    <dd><input id="authors" name="authors" type="text" value="{{authors}}"></dd>
+  </dl>
+</fieldset>
+
+<fieldset>
+  <dl>
+    <dt><label for="thumbnail">Thumbnail</label></dt>
+    <dd><input id="thumbnail" name="thumbnail" type="text" value="{{thumbnail}}"></dd>
+  </dl>
+</fieldset>
+
+<button>Pick this book</button>

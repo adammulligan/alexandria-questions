@@ -1,0 +1,27 @@
+body {
+  padding-bottom: 20px;
+}
+
+.button.delete {
+  background-color: #BA0025;
+}
+
+.button.delete:hover {
+  background-color: #96011F;
+}
+
+.header .columns {
+  padding-top: 20px;
+}
+
+h1 {
+  line-height: 1;
+}
+
+h1 small {
+  font-size: 30%;
+}
+
+.hidden {
+  display: none;
+}

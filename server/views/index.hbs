@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/foundation.css">
+
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+
+  <body>
+    <div class="row header">
+      <div class="large-12 columns">
+        <div class="nav-bar right">
+          <ul class="button-group">
+            <li><a href="#" class="button delete">I don't want this book</a></li>
+            <li>
+              <a
+                href="https://www.google.com/search?q={{book.value.name}}&tbm=bks"
+                target="_blank"
+                class="button">
+                Google Books
+              </a>
+            </li>
+          </ul>
+        </div>
+        <h1>{{book.key}} <small>{{book.id}}</small></h1>
+        <hr>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-6 columns" role="content">
+        <ul>
+          {{#each search_results}}
+          <li>
+            <a>{{title}}</a>
+            <div class="details hidden">
+              {{#if thumbnail}}
+                <img src="{{thumbnail}}">
+              {{/if}}
+              <form accept-charset="UTF-8" method="post" action="/book/{{../book.id}}">
+                {{> book-form this}}
+              </form>
+            </div>
+          </li>
+          {{/each}}
+          <li>
+            <a><strong>Not listed?</strong></a>
+            <div class="details hidden">
+              <form accept-charset="UTF-8" method="post" action="/book/{{book.id}}">
+                {{> book-form}}
+              </form
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <aside class="large-6 columns">
+        <iframe src="/book/{{book.id}}" style="width:100%;height:500px;"></iframe>
+      </aside>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
